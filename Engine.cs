@@ -1,4 +1,4 @@
-﻿using engine.Framework.Window;
+﻿using engine.Framework;
 
 namespace engine
 {
@@ -6,10 +6,7 @@ namespace engine
     {
         public static void Main(string[] args)
         {
-            Window window = new Window();
-            window.Title = "Engine - OpenTK";
-
-            window.window.Run();
+            BasicGameHost host = new BasicGameHost();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace engine.Framework.Window
     public abstract class BasicGameWindow : GLControl
     {
         public abstract GameWindow window { get; }
+        public BasicGameHost host { get; }
         public GameWindowSettings windowSettings { get; set; }
         public NativeWindowSettings nativeWindowSettings { get; set; }
 
@@ -35,7 +36,8 @@ namespace engine.Framework.Window
             }
         }
         
-        public BasicGameWindow() {
+        public BasicGameWindow(BasicGameHost host) {
+            this.host = host;
             windowSettings = new GameWindowSettings();
             nativeWindowSettings = new NativeWindowSettings();
 
@@ -45,6 +47,7 @@ namespace engine.Framework.Window
 
         public override void Initialize() {
             window.UpdateFrame += OnUpdateFrame;
+            window.RenderFrame += OnRenderFrame;
             window.Resize += OnResize;
             window.Load += OnLoad;
             window.Unload += OnUnload;
@@ -54,7 +57,14 @@ namespace engine.Framework.Window
 
         public virtual void OnUpdateFrame(FrameEventArgs args)
         {
+            
+        }
+
+        public virtual void OnRenderFrame(FrameEventArgs args)
+        {
             GL.Clear(ClearBufferMask.ColorBufferBit);
+
+            // TODO: Create buffers and draw stuff here (with Host variables)
 
             window.SwapBuffers();
         }

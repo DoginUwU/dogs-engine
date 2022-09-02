@@ -7,7 +7,7 @@ namespace engine.Framework.Window
     {
         public override GameWindow window { get; }
 
-        public Window()
+        public Window(BasicGameHost host) : base(host)
         {
             window = new GameWindow(windowSettings, nativeWindowSettings);
 
