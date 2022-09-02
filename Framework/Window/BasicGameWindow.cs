@@ -3,9 +3,8 @@ using OpenTK.Windowing.Common;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.ES30;
 
-namespace engine.Framework
+namespace engine.Framework.Window
 {
-
     public abstract class BasicGameWindow : GLControl
     {
         public abstract GameWindow window { get; }

@@ -1,6 +1,6 @@
 using OpenTK.Graphics.ES30;
 
-namespace engine.Framework
+namespace engine.Framework.Window
 {
     public class GLControl {
         internal Version? GLVersion;

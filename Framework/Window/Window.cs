@@ -1,7 +1,7 @@
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.Common;
 
-namespace engine.Framework
+namespace engine.Framework.Window
 {
     public class Window : BasicGameWindow
     {
