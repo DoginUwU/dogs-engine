@@ -45,8 +45,9 @@ namespace engine.Framework.Window
 
         public override void Initialize() {
             window.UpdateFrame += OnUpdateFrame;
-            window.Load += OnLoad;
             window.Resize += OnResize;
+            window.Load += OnLoad;
+            window.Unload += OnUnload;
 
             base.Initialize();
         }
@@ -60,6 +61,12 @@ namespace engine.Framework.Window
 
         public virtual void OnLoad() { 
             GL.ClearColor(0f, 0f, 0f, 1.0f);
+        }
+
+        public virtual void OnUnload()
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
 
         public virtual void OnResize(ResizeEventArgs e) {
