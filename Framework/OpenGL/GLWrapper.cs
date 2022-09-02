@@ -1,4 +1,5 @@
-using OpenTK.Graphics.ES30;
+using engine.Framework.OpenGL.Batches;
+using OpenTK.Graphics.OpenGL4;
 
 namespace engine.Framework.OpenGL
 {
@@ -11,6 +12,13 @@ namespace engine.Framework.OpenGL
         private static int lastBoundRenderbuffer = 0;
         private static int lastBoundSampler = 0;
         private static int lastBoundTransformFeedback = 0;
+
+        private static IVertexBatch? lastActiveBatch;
+
+        internal static void SetActiveBatch(IVertexBatch batch)
+        {
+            lastActiveBatch = batch;
+        }
 
         public static bool BindBuffer(BufferTarget target, int buffer)
         {
