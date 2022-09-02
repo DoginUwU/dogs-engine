@@ -13,6 +13,9 @@ namespace engine.Framework.OpenGL
         private static int lastBoundSampler = 0;
         private static int lastBoundTransformFeedback = 0;
 
+        private static BlendingFactorSrc lastSrcBlend;
+        private static BlendingFactorDest lastDestBlend;
+
         private static IVertexBatch? lastActiveBatch;
 
         internal static void SetActiveBatch(IVertexBatch batch)
@@ -115,6 +118,19 @@ namespace engine.Framework.OpenGL
             GL.BindTransformFeedback(target, transformFeedback);
 
             return true;
+        }
+
+        public static void SetBlend(BlendingFactorSrc src, BlendingFactorDest dest)
+        {
+            if (lastSrcBlend == src && lastDestBlend == dest)
+                return;
+
+            lastActiveBatch?.Draw();
+
+            GL.BlendFunc((BlendingFactor)src, (BlendingFactor)dest);
+
+            lastSrcBlend = src;
+            lastDestBlend = dest;
         }
     }
 }

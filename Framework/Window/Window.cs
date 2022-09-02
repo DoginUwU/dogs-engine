@@ -7,9 +7,12 @@ namespace engine.Framework.Window
     {
         public override GameWindow window { get; }
 
+        public override GLControl GLControl { get; }
+
         public Window(BasicGameHost host) : base(host)
         {
             window = new GameWindow(windowSettings, nativeWindowSettings);
+            GLControl = new GLControl();
 
             Initialize();
         }

@@ -2,20 +2,20 @@ using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.Common;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
+using engine.Framework.Graphics;
 using engine.Framework.OpenGL.Drawables;
 
 namespace engine.Framework.Window
 {
-    public abstract class BasicGameWindow : GLControl
+    public abstract class BasicGameWindow : Drawable
     {
         public abstract GameWindow window { get; }
+        public abstract GLControl GLControl { get; }
         public BasicGameHost host { get; }
         public GameWindowSettings windowSettings { get; set; }
         public NativeWindowSettings nativeWindowSettings { get; set; }
 
         private string title = "Window";
-
-        private Box testeBox;
 
         public string Title
         {
@@ -49,16 +49,14 @@ namespace engine.Framework.Window
             nativeWindowSettings.Title = Title;
         }
 
-        public override void Initialize() {
+        public void Initialize() {
             window.UpdateFrame += OnUpdateFrame;
             window.RenderFrame += OnRenderFrame;
             window.Resize += OnResize;
             window.Load += OnLoad;
             window.Unload += OnUnload;
 
-            base.Initialize();
-
-            testeBox = new Box();
+            GLControl.Initialize();
         }
 
         public virtual void OnUpdateFrame(FrameEventArgs args)
@@ -70,14 +68,16 @@ namespace engine.Framework.Window
         {
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
-            // TODO: Create buffers and draw stuff here (with Host variables)
-            testeBox.Draw();
+            UpdateSubTree();
+            DrawSubTree();
 
             window.SwapBuffers();
         }
 
         public virtual void OnLoad() { 
             GL.ClearColor(1f, 1f, 1f, 1.0f);
+
+            Add(new Box());
         }
 
         public virtual void OnUnload()
